@@ -1,61 +1,34 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:quiz_app_v2/models/quiz_brain.dart';
+import '/data/questions.dart';
 
-class QuizPage extends StatefulWidget {
-  const QuizPage({super.key});
+class QuizScreen extends StatefulWidget {
+  const QuizScreen({super.key, required this.onSelectedAnswer});
+
+  final void Function(String answer) onSelectedAnswer;
+
 
   @override
-  State<QuizPage> createState() => _QuizPageState();
+  State<QuizScreen> createState() => _QuizScreenState();
 }
 
-class _QuizPageState extends State<QuizPage> {
-  QuizBrain brain = QuizBrain();
-  late String currentQuestion;
-  late Iterable<AnswerButton> shuffleredAnswers;
+class _QuizScreenState extends State<QuizScreen> {
+  //Atributo para controlar el numero de pregunta
 
-  void checkAnswer(String userAnswer) {
+  int questionNumber = 0;
+
+  //Funcion para pasar a la siguiente pregunta
+  void nextQuestion(String selectedAnswer){
     setState(() {
-      if (!brain.getIsOver) {
-        if (brain.checkAnswer(userAnswer)) {
-          log('Bien');
-        } else {
-          log('Mal');
-        }
-        brain.nextQuestion();
-        if (brain.getIsOver) {
-          log('Se acabo');
-        } else {
-          currentQuestion = brain.getQuestionText;
-          ShuffleAnswers();
-        }
-      }
+      widget.onSelectedAnswer(selectedAnswer);
+      questionNumber++;
     });
   }
 
-  void ShuffleAnswers() {
-    if(!brain.getIsOver){
-      shuffleredAnswers = brain.getShuffleredAnswers.map((answer) {
-        return AnswerButton(
-            text: answer,
-            onTap: () {
-              checkAnswer(answer);
-            });
-      });
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    currentQuestion = brain.getQuestionText;
-    ShuffleAnswers();
-  }
 
   @override
   Widget build(BuildContext context) {
+    final currentQuestion = questions[questionNumber];
     return Center(
       child: Container(
         margin: const EdgeInsets.all(30),
@@ -65,17 +38,24 @@ class _QuizPageState extends State<QuizPage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
-              brain.getQuestionText,
+              currentQuestion.question,
               style: GoogleFonts.lato(
                   fontSize: 24,
-                  color: const Color.fromARGB(255, 201, 153, 251),
+                  color: const Color.fromARGB(255, 224, 196, 252),
                   fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
             const SizedBox(
               height: 30,
             ),
-            ...shuffleredAnswers
+            ...currentQuestion.getShuffledAnswers().map(
+                    (answer){
+                  return AnswerButton(text: answer,
+                    onTap: () {
+                      nextQuestion(answer);
+                    } ,
+                  );
+                })
           ],
         ),
       ),

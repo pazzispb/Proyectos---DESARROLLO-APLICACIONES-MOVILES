@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app_v2/constants/constants.dart';
-import 'package:quiz_app_v2/quiz_page.dart';
+import 'package:quiz_app_v2/quiz_screen.dart';
 import 'package:quiz_app_v2/start_screen.dart';
+import 'package:quiz_app_v2/data/questions.dart';
+
+import 'results_screen.dart';
+
 
 class Quiz extends StatefulWidget {
   const Quiz({super.key});
@@ -14,18 +18,32 @@ class _QuizState extends State<Quiz> {
 
   Widget? activeScreen;
 
+  List<String> userAnswers = [];
+
+
 
   @override
   void initState() { //se ejecuta antes del build
-    // TODO: implement initState
     activeScreen = StartScreen(switchScreen);
     super.initState();
   }
   //Metodo para cambiar a la pantalla QuizPage
   void switchScreen(){
     setState(() {
-      activeScreen = QuizPage();
+      activeScreen = QuizScreen(onSelectedAnswer: addAnswer);
     });
+  }
+
+  void addAnswer(String answer){
+    userAnswers.add(answer);
+    if(userAnswers.length == questions.length) {
+      //Nos movemos a una nueva pagina de resultado
+      setState(() {
+        activeScreen = ResultsScreen(startQuiz: switchScreen, choosenAnswers: userAnswers,);
+        userAnswers = [];
+      });
+    }
+
   }
 
   @override
