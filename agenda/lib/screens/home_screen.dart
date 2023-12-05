@@ -1,3 +1,6 @@
+import 'package:agenda/screens/widgets/food_widget.dart';
+import 'package:agenda/screens/widgets/gifts_widget.dart';
+import 'package:agenda/screens/widgets/weather_widget.dart';
 import 'package:flutter/material.dart';
 import '../themes/agenda_theme.dart';
 
@@ -38,11 +41,11 @@ class HomeScreen extends StatelessWidget {
                   Text(
                       "It's going to be a great birthday. We are going out for dinner at my favorite place, then watch a movie after we go to the gelateria for ice cream and espresso.", style: AgendaTheme.lightTextTheme.bodyLarge,),
                   const Divider(),
-                  const Placeholder(), //Widget del clima
+                  const WeatherWidget(), //Widget del clima
                   const Divider(),
-                  const Placeholder(), //Widget de los regalos
+                  const GiftsWidget(), //Widget de los regalos
                   const Divider(),
-                  const Placeholder() //Widget de las comidas
+                  const FoodWidget() //Widget de las comidas
                 ],
               ),
             ))
