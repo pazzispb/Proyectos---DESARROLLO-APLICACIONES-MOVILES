@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class FoodTheme {
+class AgendaTheme {
   static TextTheme lightTextTheme = TextTheme(
     titleLarge: GoogleFonts.lato( // Titulo
       fontSize: 20,
-      fontWeight: FontWeight.w200,
+      fontWeight: FontWeight.bold,
       color: Colors.black,
     ),
     bodyLarge: GoogleFonts.openSans( // Texto debajo del titulo
