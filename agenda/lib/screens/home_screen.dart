@@ -2,7 +2,6 @@ import 'package:agenda/screens/widgets/food_widget.dart';
 import 'package:agenda/screens/widgets/gifts_widget.dart';
 import 'package:agenda/screens/widgets/weather_widget.dart';
 import 'package:flutter/material.dart';
-import '../themes/agenda_theme.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
