@@ -36,10 +36,12 @@ class HomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('My Birthday',
-                      style: AgendaTheme.lightTextTheme.titleLarge),
+                      style: Theme.of(context).textTheme.titleLarge),
                   const Divider(),
                   Text(
-                      "It's going to be a great birthday. We are going out for dinner at my favorite place, then watch a movie after we go to the gelateria for ice cream and espresso.", style: AgendaTheme.lightTextTheme.bodyLarge,),
+                    "It's going to be a great birthday. We are going out for dinner at my favorite place, then watch a movie after we go to the gelateria for ice cream and espresso.",
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
                   const Divider(),
                   const WeatherWidget(), //Widget del clima
                   const Divider(),
