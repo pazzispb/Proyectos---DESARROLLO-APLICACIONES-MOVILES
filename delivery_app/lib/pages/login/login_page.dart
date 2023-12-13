@@ -1,10 +1,29 @@
-import 'dart:js';
-
+import 'package:delivery_app/pages/login/login_controller.dart';
 import 'package:delivery_app/utils/my_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:lottie/lottie.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+
+  //Crear un objeto de la clase LoginController
+  LoginController _controller = LoginController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+      _controller.init(context);
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +31,8 @@ class LoginPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            _imageBanner(context),
+            //_imageBanner(context),
+            _loginAnimation(context),
             _textFieldEmail(),
             _textFieldPassword(),
             _buttonLogin(),
@@ -36,7 +56,7 @@ class LoginPage extends StatelessWidget {
         ),
         GestureDetector(
           onTap: (){
-            
+            _controller.goToRegisterPage(context);
           },
           child: Text(
             'Registrate',
@@ -53,7 +73,9 @@ class LoginPage extends StatelessWidget {
         width: double.infinity,
         margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 30),
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+
+          },
           style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 15),
               shape: RoundedRectangleBorder(
@@ -69,6 +91,7 @@ class LoginPage extends StatelessWidget {
           color: MyColors.primaryColorOpacity,
           borderRadius: BorderRadius.circular(40)),
       child: TextField(
+        controller: _controller.emailController,
         decoration: InputDecoration(
             border: InputBorder.none,
             hintText: 'correo electronico',
@@ -88,6 +111,7 @@ class LoginPage extends StatelessWidget {
           color: MyColors.primaryColorOpacity,
           borderRadius: BorderRadius.circular(40)),
       child: TextField(
+        controller: _controller.passwordController,
         obscureText: true,
         decoration: InputDecoration(
             border: InputBorder.none,
@@ -111,6 +135,15 @@ class LoginPage extends StatelessWidget {
         width: 200,
         height: 200,
       ),
+    );
+  }
+
+  Container _loginAnimation(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      margin: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height * 0.22, bottom: 50),
+      child: Lottie.asset('assets/json/delivery.json'),
     );
   }
 }
