@@ -33,41 +33,39 @@ class ResultsScreen extends StatelessWidget {
       return element['user_answer'] == element['correct_answers'];
     }).length;
 
-    return SizedBox(
-      child: Container(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text('You Answered $numCorrectAnswers of $numTotalQuestions questions correctly',
-                style: GoogleFonts.lato(
-                    fontSize: 24,
-                    color: const Color.fromARGB(255, 201, 153, 251),
-                    fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
-              const SizedBox(
-                height: 30.0,
-              ),
-              Column(
-                children: [
-                  // Desplegar summary
-                  SummaryScreen(questionSummary: summaryData),
-                  const SizedBox(
-                    height: 20,
-
-                  ),
-                  OutlinedButton.icon(
-                    style: OutlinedButton.styleFrom(foregroundColor: const Color.fromARGB(255, 201, 153, 251), backgroundColor: const Color.fromARGB(255, 23, 1, 95)),
-                    onPressed: startQuiz,
-                    label: Text('Restart Quiz', style: GoogleFonts.lato(
-                        color: const Color.fromARGB(255, 224, 196, 252)),),
-                    icon: const Icon(Icons.restart_alt, color: Color.fromARGB(255, 224, 196, 252),),
-                  )
-                ],
-              ),
-            ],
-          ),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text('You Answered $numCorrectAnswers of $numTotalQuestions questions correctly',
+              style: GoogleFonts.lato(
+                  fontSize: 24,
+                  color: const Color.fromARGB(255, 201, 153, 251),
+                  fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
+            const SizedBox(
+              height: 30.0,
+            ),
+            Column(
+              children: [
+                // Desplegar summary
+                SummaryScreen(questionSummary: summaryData),
+                const SizedBox(
+                  height: 20,
+      
+                ),
+                OutlinedButton.icon(
+                  style: OutlinedButton.styleFrom(foregroundColor: const Color.fromARGB(255, 201, 153, 251), backgroundColor: const Color.fromARGB(255, 23, 1, 95)),
+                  onPressed: startQuiz,
+                  label: Text('Restart Quiz', style: GoogleFonts.lato(
+                      color: const Color.fromARGB(255, 224, 196, 252)),),
+                  icon: const Icon(Icons.restart_alt, color: Color.fromARGB(255, 224, 196, 252),),
+                )
+              ],
+            ),
+          ],
         ),
       ),
     );
