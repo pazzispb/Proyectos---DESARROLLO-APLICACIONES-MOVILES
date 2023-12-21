@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-
-import 'location.dart';
+import 'package:weather_app/weather.dart';
 
 class LocationPage extends StatefulWidget {
   const LocationPage({super.key});
@@ -11,34 +10,33 @@ class LocationPage extends StatefulWidget {
 }
 
 class _LocationPageState extends State<LocationPage> {
-  bool isLoading = true; // Track the loading state
+  bool isLoading = true;
+  double? temperature;
+  Weather weather = Weather();
 
-  Future<void> getCurrentPositionData() async {
+  @override
+  void initState() {
+    getCurrentWeather();
+    super.initState();
+  }
+
+  Future<void> getCurrentWeather() async {
     setState(() {
       isLoading = true;
     });
 
-    Location location = Location();
-    await location.getCurrentLocation();
+    await weather.getCurrentWeather();
 
     setState(() {
       isLoading = false;
-      print(location.latitude);
-      print(location.longitude);
     });
-  }
-
-  @override
-  void initState() {
-    getCurrentPositionData();
-    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Material App Bar'),
+        title: const Text('Clima'),
       ),
       body: Center(
         child: isLoading
@@ -46,7 +44,12 @@ class _LocationPageState extends State<LocationPage> {
                 color: Colors.blue,
                 size: 50.0,
               )
-            : null,
+            : Chip(
+              label: Text(
+                  weather.temperature.toString(),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+            ),
       ),
     );
   }
