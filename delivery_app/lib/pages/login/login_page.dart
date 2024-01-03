@@ -12,7 +12,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   //Crear un objeto de la clase LoginController
   LoginController _controller = LoginController();
 
@@ -55,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
           width: 7,
         ),
         GestureDetector(
-          onTap: (){
+          onTap: () {
             _controller.goToRegisterPage(context);
           },
           child: Text(
@@ -74,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
         margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 30),
         child: ElevatedButton(
           onPressed: () {
-
+            _controller.login();
           },
           style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 15),

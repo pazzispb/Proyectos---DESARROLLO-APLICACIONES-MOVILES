@@ -11,9 +11,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-
   RegisterController _controller = RegisterController();
-
 
   @override
   void initState() {
@@ -23,7 +21,6 @@ class _RegisterPageState extends State<RegisterPage> {
     });
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +36,11 @@ class _RegisterPageState extends State<RegisterPage> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: IconButton(onPressed: (){
-                        _controller.goToLoginPage(context);
-                      }, icon: const Icon(Icons.arrow_back)),
+                      child: IconButton(
+                          onPressed: () {
+                            _controller.goToLoginPage(context);
+                          },
+                          icon: const Icon(Icons.arrow_back)),
                     ),
                   ],
                 ),
@@ -60,7 +59,6 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
     );
   }
-
 
   Widget _textFieldName() {
     return Container(
@@ -81,7 +79,6 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-
   Widget _textFieldLastName() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
@@ -100,7 +97,6 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
     );
   }
-
 
   Widget _textFieldEmail() {
     return Container(
@@ -121,7 +117,6 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-
   Widget _textFieldTelephone() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
@@ -140,7 +135,6 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
     );
   }
-
 
   Widget _textFieldPassword() {
     return Container(
@@ -161,7 +155,6 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
     );
   }
-
 
   Widget _textFieldConfirmPassword() {
     return Container(
@@ -194,20 +187,20 @@ class _RegisterPageState extends State<RegisterPage> {
             borderRadius: BorderRadius.circular(40),
           ),
         ),
-        onPressed: () {},
+        onPressed: () {
+          _controller.register();
+        },
         child: const Text('Registrarse'),
       ),
     );
   }
 
-  Widget _userAvatar(){
+  Widget _userAvatar() {
     return Container(
       child: CircleAvatar(
         backgroundColor: Colors.grey.shade200,
         radius: 75,
-        backgroundImage: const AssetImage(
-          'assets/images/user_profile.png'
-        ),
+        backgroundImage: const AssetImage('assets/images/user_profile.png'),
       ),
     );
   }
